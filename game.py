@@ -1,0 +1,18 @@
+from player import Player
+
+class Game:
+    def __init__(self,screen):
+        self.screen = screen
+        self.object = []
+    
+    def set_up(self):
+        player = Player()
+        self.objects.append(player)
+        print("do set up")
+
+
+    def update(self):
+        print("update")
+
+        for objects in self.objects:
+            object.render(self.screen)
