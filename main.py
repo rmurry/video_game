@@ -10,7 +10,8 @@ pygame.display.set_caption('Top Scroller')
 
 game = Game(screen)
 game.set_up()
+
 while True:
     game.update()
     screen.fill(config.BLACK)
-    pygame.display.flip
+    pygame.display.flip()

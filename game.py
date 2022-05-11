@@ -3,7 +3,7 @@ from player import Player
 class Game:
     def __init__(self,screen):
         self.screen = screen
-        self.object = []
+        self.objects = []
     
     def set_up(self):
         player = Player()
@@ -14,5 +14,5 @@ class Game:
     def update(self):
         print("update")
 
-        for objects in self.objects:
+        for object in self.objects:
             object.render(self.screen)
