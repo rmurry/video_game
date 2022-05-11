@@ -1,8 +1,9 @@
 import pygame
+from . import config
 
 pygame.init()
 
-screen = pygame.display.set_mode(600,400)
+screen = pygame.display.set_mode((600,400))
 
 pygame.display.set_caption('Top Scroller')
 
