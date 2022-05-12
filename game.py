@@ -39,7 +39,7 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.game_state = GameState.ENDED
-                elif event.key == pygame.K_w:           # move up
+                elif event.key == pygame.K_w:
                     self.player.update_position(0,-1)
                 elif event.key == pygame.K_s:           # move down
                     self.player.update_position(0,1)
