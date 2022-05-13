@@ -5,7 +5,7 @@ class Player:
     def __init__(self,x_pos,y_pos):
         print("player created")
         self.position = [x_pos,y_pos]
-        self.image = pygame.image.load("imgs/player.png")
+        self.image = pygame.image.load("imgs/rylan.png")
         self.image = pygame.transform.scale(self.image,(config.SCALE,config.SCALE))
         self.rect = pygame.Rect(self.position[0]*config.SCALE,self.position[1]*config.SCALE,config.SCALE,config.SCALE)
 
