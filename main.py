@@ -14,6 +14,8 @@ clock = pygame.time.Clock()         #adds framerate to the game
 game = Game(screen)
 game.set_up()
 
+
+# todo - this should handle menus at some pointss
 while game.game_state == GameState.RUNNING:
     clock.tick(60)
     game.update()
