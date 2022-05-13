@@ -1,5 +1,6 @@
 import pygame
 import config
+import math
 from player import Player
 from game_state import GameState
 
@@ -10,6 +11,7 @@ class Game:
         self.objects = []
         self.game_state = GameState.NONE
         self.map = []
+        self.camera = [0,0]
     
     def set_up(self):
         player = Player(1,1)
@@ -23,13 +25,13 @@ class Game:
 
     def update(self):
         self.screen.fill(config.BLACK)
-        print("update")
+        #print("update")
         self.handle_events()
 
         self.render_map(self.screen)
 
         for object in self.objects:
-            object.render(self.screen)
+            object.render(self.screen,self.camera)
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -58,12 +60,14 @@ class Game:
             print(self.map)
 
     def render_map(self,screen):
+        self.determine_camera()
+
         y_pos = 0
         for line in self.map:
             x_pos = 0
             for tile in line:
                 image = map_tile_image[tile]
-                rect = pygame.Rect(x_pos * config.SCALE,y_pos * config.SCALE,config.SCALE,config.SCALE)
+                rect = pygame.Rect(x_pos * config.SCALE,y_pos * config.SCALE - (self.camera[1] * config.SCALE),config.SCALE,config.SCALE)
                 screen.blit(image,rect)
                 x_pos += 1
             y_pos += 1
@@ -74,13 +78,25 @@ class Game:
         if new_position[0] < 0 or new_position[0] > len(self.map[0]) - 1:
             return
 
-        if new_position[1] < 0 or new_position[1] > len(self.map[1]) - 1:
+        if new_position[1] < 0 or new_position[1] > len(self.map) - 1:
             return
 
         if self.map[new_position[1]][new_position[0]] == "W":
             return
 
         unit.update_position(new_position)
+
+    def determine_camera(self):
+        max_y_pos = len(self.map) - config.SCREEN_HEIGHT / config.SCALE
+        y_pos = self.player.position[1] - math.ceil(round(config.SCREEN_HEIGHT / config.SCALE / 2))
+
+        if y_pos <= max_y_pos and y_pos >= 0:
+            self.camera[1] = y_pos
+        elif y_pos < 0:
+            self.camera[1] = 0
+        else:
+            self.camera[1] = max_y_pos
+
 
 
 
